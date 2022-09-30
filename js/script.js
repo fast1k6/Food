@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
             // Timer 
 
-            const deadLine = '2023-04-28';
+            const deadLine = '2023-05-20';
 
             function getTimeRemaining (endtime){
                 let days, hours, minutes, seconds;
@@ -100,36 +100,117 @@ window.addEventListener('DOMContentLoaded', () =>{
 
             // Modal
 
-            const modalTrigger = document.querySelectorAll('[data-modal]'),
-                modal = document.querySelector('.modal'),
-                modalCloseBtn = document.querySelector('[data-close]');
+        const modalTrigger = document.querySelectorAll('[data-modal]'),
+            modal = document.querySelector('.modal'),
+            modalCloseBtn = document.querySelector('[data-close]');
 
-                modalTrigger.forEach(btn =>{
-                    btn.addEventListener('click', () => {
-                        modal.classList.add('show');
-                        modal.classList.remove('hide');
-                        document.body.style.overflow = 'hidden';
-                    });
-                });
+            function openModal () {
+                modal.classList.add('show');
+                modal.classList.remove('hide');
+                // modal.classList.toggle('show'); Вариант где можно тоглить 
+                document.body.style.overflow = 'hidden';
+                clearInterval(modalTimerId);
+            }
 
-                function closeModal() {
-                    modal.classList.add('hide');
-                    modal.classList.remove('show');
-                    document.body.style.overflow = '';
+            modalTrigger.forEach(btn => {
+                btn.addEventListener('click', openModal);
+            });
+
+        
+
+            function closeModal () {
+                modal.classList.add('hide');
+                modal.classList.remove('show');
+                // modal.classList.toggle('show'); Вариант где можно тоглить 
+                document.body.style.overflow = '';
+            }
+
+            modalCloseBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal){
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if(e.code === "Escape" && modal.classList.contains('show')){
+                    closeModal();
+                }
+            });
+
+            const modalTimerId = setTimeout(openModal, 5000);
+
+            function showModalByScroll( ) {
+                if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight -1){
+                    openModal();
+                    window.removeEventListener('scroll', showModalByScroll);
+            }
+        }
+
+            window.addEventListener('scroll', showModalByScroll);
+
+            // Использовать классы для карточек
+
+            class MenuCard {
+                constructor (src, alt, title, descr, price, perentSelector) {
+                    this.src = src;
+                    this.alt = alt;
+                    this.title = title;
+                    this.descr = descr;
+                    this.price = price;
+                    this.perentSelector = document.querySelector(perentSelector);
+                    this.transfer = 42;
+                    this.cheangeToUAH();
+                }
+                
+                cheangeToUAH() {
+                    this.price = this.price * this.transfer;
                 }
 
-                modalCloseBtn.addEventListener('click', closeModal);
-                    
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal){
-                        closeModal();
-                    }
-                });
+                render() {
+                    const element = document.createElement('div');
+                    element.innerHTML = `
+                        <div class="menu__item">
+                            <img src=${this.src} alt=${this.alt}">
+                            <h3 class="menu__item-subtitle">${this.title}</h3>
+                            <div class="menu__item-descr">${this.descr}</div>
+                            <div class="menu__item-divider"></div>
+                            <div class="menu__item-price">
+                                <div class="menu__item-cost">Цена:</div>
+                                <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                            </div>
+                        </div>
+                `;
 
-                document.addEventListener('keydown', (e) => {
-                    if (e.code === "Escape" && modal.classList.contains('show')){
-                        closeModal();
-                    }
-                });
+                this.perentSelector.append(element);
+                }
 
-        }); 
+            }
+
+            new MenuCard(
+                "img/tabs/vegy.jpg",
+                "vegy",
+                'Меню "Фитнес"',
+                'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+                5.8,
+                '.menu .container'
+            ).render();
+            new MenuCard(
+                "img/tabs/elite.jpg",
+                "elite",
+                'Меню “Премиум”',
+                'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+                9,
+                '.menu .container'
+            ).render();
+            new MenuCard(
+                "img/tabs/post.jpg",
+                "post",
+                'Меню "Постное"',
+                'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+                13.5,
+                '.menu .container'
+            ).render();
+
+        });
