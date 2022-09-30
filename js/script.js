@@ -139,6 +139,8 @@ window.addEventListener('DOMContentLoaded', () =>{
                 }
             });
 
+// MenuCard
+
             const modalTimerId = setTimeout(openModal, 5000);
 
             function showModalByScroll( ) {
@@ -185,7 +187,6 @@ window.addEventListener('DOMContentLoaded', () =>{
 
                 this.perentSelector.append(element);
                 }
-
             }
 
             new MenuCard(
@@ -214,3 +215,4 @@ window.addEventListener('DOMContentLoaded', () =>{
             ).render();
 
         });
+
