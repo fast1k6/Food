@@ -218,6 +218,8 @@ window.addEventListener('DOMContentLoaded', () =>{
 
             ).render();
 
+            // Forms
+
             const forms = document.querySelectorAll('form');
 
             const message = {
@@ -240,7 +242,7 @@ window.addEventListener('DOMContentLoaded', () =>{
                         display: block;
                         margin: 0 auto;
                     `;
-                    form.appendChild(statusMessage);
+
                     form.insertAdjacentElement('afterend', statusMessage);
 
                     const request = new XMLHttpRequest();
@@ -270,7 +272,7 @@ window.addEventListener('DOMContentLoaded', () =>{
                 });
             }
 
-            function showThanksModal () {
+            function showThanksModal (message) {
                 const prevModalDialog = document.querySelector('.modal__dialog');
 
 
@@ -282,7 +284,7 @@ window.addEventListener('DOMContentLoaded', () =>{
                 thanksModal.innerHTML = `
                     <div class="modal__content">
                         <div class="modal__close" data-close>×</div>
-                        <div class="modal_title">${message}</div>
+                        <div class="modal__title">${message}</div>
                     </div>
                 `;
 
