@@ -18,5 +18,8 @@
   "homepage": "https://github.com/fast1k6/Food#readme",
   "devDependencies": {
     "json-server": "^0.17.0"
+  },
+  "dependencies": {
+    "axios": "^1.1.2"
   }
 }
