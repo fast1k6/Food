@@ -323,8 +323,8 @@ window.addEventListener('DOMContentLoaded', () =>{
 
             let slideIndex = 1;
             const slides = document.querySelectorAll('.offer__slide'),
-                    prev = document.querySelector('.offer__slide-prev'),
-                    next = document.querySelector('.offer__slide-next'),
+                    prev = document.querySelector('.offer__slider-prev'),
+                    next = document.querySelector('.offer__slider-next'),
                     total = document.querySelector('#total'),
                     current = document.querySelector('#current');
             
