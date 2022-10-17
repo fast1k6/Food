@@ -324,7 +324,10 @@ window.addEventListener('DOMContentLoaded', () =>{
             let slideIndex = 1;
             let offset = 0;
             const slides = document.querySelectorAll('.offer__slide'),
+<<<<<<< HEAD
                     slider = document.querySelector('.offer__slider'),
+=======
+>>>>>>> 919b9fa1c75b0d219e36df71c0ca4f6c2030efe9
                     prev = document.querySelector('.offer__slider-prev'),
                     next = document.querySelector('.offer__slider-next'),
                     total = document.querySelector('#total'),
