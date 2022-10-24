@@ -492,7 +492,7 @@ window.addEventListener('DOMContentLoaded', () =>{
                     calcTotal();
 
                     function getStaticInformation(parentSelector, activeClass) {
-                        const elements = document.querySelector(`${parentSelector} div`);
+                        const elements = document.querySelectorAll(`${parentSelector} div`);
 
                         elements.forEach(elem => {
                             elem.addEventListener('click', (e) => {
