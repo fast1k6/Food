@@ -106,4 +106,4 @@ function calc () {
 
 }
 
-module.exports = calc;
+export default calc;
